@@ -1,0 +1,38 @@
+.keyboard {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 10px;
+padding: 1rem;
+}
+
+.key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  background: transparent;
+  border: none;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 100ms linear;
+}
+
+.key:hover {
+  background-color: #FAFAFA;
+}
+
+.key--bullet {
+  border-radius: 50%;
+  background-color: #d3d3d3;
+}
+
+.key--bullet:hover {
+  transform: translateY(-2px);
+  will-change: transform;
+  transition: transform 100ms linear;
+  background-color: #d3d3d3;
+}

@@ -1,0 +1,9 @@
+.calculator {
+  border-radius: var(--border-radius);
+  background: var(--color-calculator-background);
+  box-shadow: var(--shadow-medium);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}

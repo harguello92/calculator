@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: .5rem;
+}
+
+.actions {
+  display: flex;
+  gap: .5rem;
+}
+
+.button {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.closeButton {
+  background-color: rgb(255, 80, 80);
+}
+
+.minimizeButton {
+  background-color: rgb(243, 226, 80);
+}
