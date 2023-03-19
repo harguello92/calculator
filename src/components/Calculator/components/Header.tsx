@@ -16,12 +16,14 @@ function Header() {
       <div className={styles.actions}>
         <span
           className={classNames(styles.button, styles.closeButton)}
-          onClick={onClose}>
+          onClick={onClose}
+        >
           <Close width={10} height={10} />
         </span>
         <span
           className={classNames(styles.button, styles.minimizeButton)}
-          onClick={onMinimize}>
+          onClick={onMinimize}
+        >
           <Minimize width={10} height={10} />
         </span>
       </div>

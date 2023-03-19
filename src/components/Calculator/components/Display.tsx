@@ -1,15 +1,15 @@
 import useGlobalState from "../../../hooks/useGlobalState";
-import styles from "./Screen.module.css";
+import styles from "./Display.module.css";
 
-function Screen() {
+function Display() {
   const { display, subDisplay } = useGlobalState();
 
   return (
     <div className={styles.display}>
-      <small className={styles.operations}>{subDisplay}</small>
+      <p className={styles.operations}>{subDisplay}</p>
       <p className={styles.total}>{display}</p>
     </div>
   );
 }
 
-export default Screen;
+export default Display;
