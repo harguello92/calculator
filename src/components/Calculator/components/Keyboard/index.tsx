@@ -4,6 +4,7 @@ import useKeyboard from "./useKeyboard";
 
 function Keyboard() {
   const { keys } = useKeyboard();
+
   return (
     <div className={styles.keyboard}>
       {keys.map(({ value, onClick, bullet }) => (
@@ -12,7 +13,8 @@ function Keyboard() {
           className={classNames(styles.key, {
             [styles["key--bullet"]]: bullet,
           })}
-          onClick={onClick}>
+          onClick={onClick}
+        >
           {value}
         </button>
       ))}
