@@ -1,53 +1,59 @@
-import { useRef } from "preact/hooks";
+import { useState } from "preact/hooks";
 import useGlobalState from "./useGlobalState";
-
-const signs = {
-  minus: "-",
-};
+import { SIGNS } from "../constants/signs";
 
 const useActions = () => {
-  const { setDisplay, setSubDisplay, resetGlobal } = useGlobalState();
-  const queueOperation = useRef("");
+  const { setDisplay, display, setSubDisplay } = useGlobalState();
+  const [newOperation, setNewOperation] = useState(true);
+
+  // TODO: Move to a utils file using a display bussines logic service
+  const getLastItem = (string: string) => string.slice(-1);
+  const getIsNumber = (string: string) => !isNaN(Number(string));
+
+  const isValidOperation = (operation: string) => {
+    const lastItem = getLastItem(display);
+    const lastItemIsNumber = getIsNumber(lastItem);
+    const isDisplayInitialStatus = display !== "0";
+    const isNegatingNumber =
+      operation === SIGNS.minus && lastItem !== SIGNS.minus;
+
+    return (lastItemIsNumber && isDisplayInitialStatus) || isNegatingNumber;
+  };
 
   const setOperation = (operation: string) => {
-    const lastItem = queueOperation.current.slice(-1);
-    const lastIsAlreadyOperation = isNaN(Number(lastItem));
-    const operationIsMinus = operation === signs.minus;
-    const isLastItemIsMinus = lastItem === signs.minus;
-    const isFirstInteraction = queueOperation.current === "";
+    if (!isValidOperation(operation)) return;
 
-    if (
-      (lastIsAlreadyOperation && !operationIsMinus) ||
-      isLastItemIsMinus ||
-      isFirstInteraction
-    )
-      return;
-
-    queueOperation.current = queueOperation.current + operation;
-    setDisplay(queueOperation.current);
+    setNewOperation(false);
+    setDisplay(display.concat(operation));
   };
 
   const setNumber = (number: string) => {
-    queueOperation.current = queueOperation.current + number;
-    setDisplay(queueOperation.current);
+    if (newOperation) {
+      setNewOperation(false);
+      setDisplay(number);
+      return;
+    }
+    setDisplay(display.concat(number));
   };
 
   const evaluation = () => {
-    const evalBuild = queueOperation.current.replace(/x/g, "*");
-
     try {
-      const result = eval(evalBuild);
-      setSubDisplay(queueOperation.current);
-      setDisplay(result);
-      queueOperation.current = result;
+      const toEvaluate = display.replace(/x/g, "*");
+      const hasSomethingToEvaluate = !getIsNumber(toEvaluate);
+
+      if (!hasSomethingToEvaluate) return;
+
+      setSubDisplay(display + "=");
+      setDisplay(eval(toEvaluate).toString());
+      setNewOperation(true);
     } catch (error) {
-      console.error(error);
+      setSubDisplay("Error");
     }
   };
 
   const reset = () => {
-    resetGlobal();
-    queueOperation.current = "";
+    setDisplay("0");
+    setSubDisplay("");
   };
 
   return { setOperation, setNumber, evaluation, reset };
