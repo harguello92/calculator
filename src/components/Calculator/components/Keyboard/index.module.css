@@ -4,6 +4,7 @@
   gap: 15px 22px;
 }
 
+
 .key {
   display: flex;
   align-items: center;
@@ -35,4 +36,9 @@
   will-change: transform;
   transition: transform 100ms linear;
   background-color: #d3d3d3;
+}
+
+.keyBlank {
+  height: 50px;
+  width: 50px;
 }

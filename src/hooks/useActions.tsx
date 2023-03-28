@@ -4,7 +4,6 @@ import { SIGNS } from "../constants/signs";
 
 const useActions = () => {
   const { setDisplay, display, setSubDisplay } = useGlobalState();
-  const [newOperation, setNewOperation] = useState(true);
 
   // TODO: Move to a utils file using a display bussines logic service
   const getLastItem = (string: string) => string.slice(-1);
@@ -17,22 +16,30 @@ const useActions = () => {
     const isNegatingNumber =
       operation === SIGNS.minus && lastItem !== SIGNS.minus;
 
-    return (lastItemIsNumber && isDisplayInitialStatus) || isNegatingNumber;
+    return (
+      operation === SIGNS.minus ||
+      (lastItemIsNumber && isDisplayInitialStatus) ||
+      isNegatingNumber
+    );
   };
 
   const setOperation = (operation: string) => {
     if (!isValidOperation(operation)) return;
 
-    setNewOperation(false);
+    if (display === "0" && operation === SIGNS.minus) {
+      setDisplay(operation);
+      return;
+    }
+
     setDisplay(display.concat(operation));
   };
 
   const setNumber = (number: string) => {
-    if (newOperation) {
-      setNewOperation(false);
+    if (display === "0") {
       setDisplay(number);
       return;
     }
+
     setDisplay(display.concat(number));
   };
 
@@ -45,9 +52,8 @@ const useActions = () => {
 
       setSubDisplay(display + "=");
       setDisplay(eval(toEvaluate).toString());
-      setNewOperation(true);
     } catch (error) {
-      setSubDisplay("Error");
+      setSubDisplay("Operación no válida");
     }
   };
 
@@ -56,7 +62,11 @@ const useActions = () => {
     setSubDisplay("");
   };
 
-  return { setOperation, setNumber, evaluation, reset };
+  const deleteLast = () => {
+    setDisplay(display.slice(0, -1));
+  };
+
+  return { setOperation, setNumber, evaluation, reset, deleteLast };
 };
 
 export default useActions;
