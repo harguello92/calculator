@@ -63,6 +63,12 @@ const useActions = () => {
   };
 
   const deleteLast = () => {
+    if (display.length === 1) {
+      setSubDisplay("");
+      setDisplay("0");
+      return;
+    }
+
     setDisplay(display.slice(0, -1));
   };
 

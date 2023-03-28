@@ -5,6 +5,7 @@ import { ReactComponent as Equal } from "../../../Icons/Equal.svg";
 import { ReactComponent as Multiply } from "../../../Icons/Multiply.svg";
 import { ReactComponent as Plus } from "../../../Icons/Plus.svg";
 import { ReactComponent as Minus } from "../../../Icons/Minus.svg";
+import { ReactComponent as Delete } from "../../../Icons/Delete.svg";
 
 const useKeyboard = () => {
   const { setOperation, setNumber, evaluation, reset, deleteLast } =
@@ -17,7 +18,11 @@ const useKeyboard = () => {
   }[];
 
   const keys: keys = [
-    { value: "Re", onClick: () => deleteLast(), bullet: true },
+    {
+      value: <Delete width={20} height={20} />,
+      onClick: () => deleteLast(),
+      bullet: true,
+    },
     { value: "C", onClick: () => reset(), bullet: true },
     {
       value: "%",

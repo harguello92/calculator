@@ -2,6 +2,7 @@ import classNames from "classnames";
 import styles from "./Header.module.css";
 import { ReactComponent as Minimize } from "../../Icons/Minus.svg";
 import { ReactComponent as Close } from "../../Icons/Multiply.svg";
+import { ReactComponent as History } from "../../Icons/History.svg";
 
 function Header() {
   const onClose = () => {
@@ -10,6 +11,8 @@ function Header() {
   const onMinimize = () => {
     console.log("Coming soon...");
   };
+
+  const onClickHistory = () => console.log("History opened");
 
   return (
     <div className={styles.header}>
@@ -26,6 +29,9 @@ function Header() {
         >
           <Minimize width={10} height={10} />
         </span>
+      </div>
+      <div className={styles.history} onClick={onClickHistory}>
+        <History width={25} height={25} />
       </div>
     </div>
   );

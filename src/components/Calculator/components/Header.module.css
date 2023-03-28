@@ -1,5 +1,7 @@
 .header {
   margin: 0 -0.8rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .actions {
@@ -25,4 +27,8 @@
 
 .minimizeButton {
   background-color: rgb(243, 226, 80);
+}
+
+.history {
+  cursor: pointer;
 }
