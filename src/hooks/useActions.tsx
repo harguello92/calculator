@@ -1,76 +1,85 @@
-import { useState } from "preact/hooks";
 import useGlobalState from "./useGlobalState";
 import { SIGNS } from "../constants/signs";
+import { getIsInitialStatus, getIsValidOperation } from "../utils";
+import type { Signs, SignTypes, Sign } from "../constants/signs";
+import { useCallback, useEffect } from "preact/hooks";
 
 const useActions = () => {
-  const { setDisplay, display, setSubDisplay } = useGlobalState();
+  const {
+    setDisplay,
+    display,
+    setSubDisplay,
+    setOperation: setOperationToGlobal,
+    operations,
+  } = useGlobalState();
 
-  // TODO: Move to a utils file using a display bussines logic service
-  const getLastItem = (string: string) => string.slice(-1);
-  const getIsNumber = (string: string) => !isNaN(Number(string));
+  const setOperation = (sign: SignTypes) => {
+    if (!getIsValidOperation(operations, SIGNS[sign].operation)) return;
 
-  const isValidOperation = (operation: string) => {
-    const lastItem = getLastItem(display);
-    const lastItemIsNumber = getIsNumber(lastItem);
-    const isDisplayInitialStatus = display !== "0";
-    const isNegatingNumber =
-      operation === SIGNS.minus && lastItem !== SIGNS.minus;
-
-    return (
-      operation === SIGNS.minus ||
-      (lastItemIsNumber && isDisplayInitialStatus) ||
-      isNegatingNumber
-    );
-  };
-
-  const setOperation = (operation: string) => {
-    if (!isValidOperation(operation)) return;
-
-    if (display === "0" && operation === SIGNS.minus) {
-      setDisplay(operation);
+    if (getIsInitialStatus(operations) && SIGNS[sign] === SIGNS.minus) {
+      setOperationToGlobal((operations: Sign[]) => [
+        ...operations,
+        SIGNS[sign],
+      ]);
       return;
     }
 
-    setDisplay(display.concat(operation));
+    setOperationToGlobal((operations: Sign[]) => [...operations, SIGNS[sign]]);
   };
 
   const setNumber = (number: string) => {
-    if (display === "0") {
-      setDisplay(number);
-      return;
-    }
-
-    setDisplay(display.concat(number));
+    setOperationToGlobal((operations: Signs[]) => [...operations, number]);
   };
 
   const evaluation = () => {
     try {
-      const toEvaluate = display.replace(/x/g, "*");
-      const hasSomethingToEvaluate = !getIsNumber(toEvaluate);
+      setSubDisplay(
+        operations.reduce(
+          (acc: string, current: any) => acc + (current?.operation || current),
+          ""
+        ) + SIGNS.equal.display
+      );
 
-      if (!hasSomethingToEvaluate) return;
+      setDisplay(
+        eval(
+          operations.reduce(
+            (acc: string, current: any) =>
+              acc + (current?.operation || current),
+            ""
+          )
+        ).toString()
+      );
 
-      setSubDisplay(display + "=");
-      setDisplay(eval(toEvaluate).toString());
+      // setOperationToGlobal(display.split(""));
     } catch (error) {
-      setSubDisplay("Operación no válida");
+      setSubDisplay("Not a valid operation");
     }
   };
 
   const reset = () => {
-    setDisplay("0");
-    setSubDisplay("");
+    setOperationToGlobal([]);
   };
 
   const deleteLast = () => {
-    if (display.length === 1) {
+    setOperationToGlobal((operations: Signs[]) => operations.slice(0, -1));
+  };
+
+  useEffect(() => {
+    setDisplay(
+      operations.reduce(
+        (acc: string, current: any) => acc + (current?.display || current),
+        ""
+      )
+    );
+
+    if (operations.length === 0) {
       setSubDisplay("");
-      setDisplay("0");
-      return;
     }
 
-    setDisplay(display.slice(0, -1));
-  };
+    if (operations.length === 0) {
+      setDisplay("0");
+    }
+  }, [operations]);
 
   return { setOperation, setNumber, evaluation, reset, deleteLast };
 };

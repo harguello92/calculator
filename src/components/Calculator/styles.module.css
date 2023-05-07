@@ -4,6 +4,6 @@
   box-shadow: var(--shadow-medium);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   padding: 0.5rem 1.2rem;
+  position: relative;
 }

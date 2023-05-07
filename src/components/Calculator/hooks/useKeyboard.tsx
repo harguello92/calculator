@@ -1,23 +1,23 @@
-import useActions from "../../../../hooks/useActions";
-
-import { ReactComponent as Division } from "../../../Icons/Division.svg";
-import { ReactComponent as Equal } from "../../../Icons/Equal.svg";
-import { ReactComponent as Multiply } from "../../../Icons/Multiply.svg";
-import { ReactComponent as Plus } from "../../../Icons/Plus.svg";
-import { ReactComponent as Minus } from "../../../Icons/Minus.svg";
-import { ReactComponent as Delete } from "../../../Icons/Delete.svg";
+import useActions from "../../../hooks/useActions";
+import { ReactComponent as Division } from "../../Icons/Division.svg";
+import { ReactComponent as Equal } from "../../Icons/Equal.svg";
+import { ReactComponent as Multiply } from "../../Icons/Multiply.svg";
+import { ReactComponent as Plus } from "../../Icons/Plus.svg";
+import { ReactComponent as Minus } from "../../Icons/Minus.svg";
+import { ReactComponent as Delete } from "../../Icons/Delete.svg";
+import { ReactComponent as Percentage } from "../../Icons/Percentage.svg";
 
 const useKeyboard = () => {
   const { setOperation, setNumber, evaluation, reset, deleteLast } =
     useActions();
 
-  type keys = {
+  interface IKeys {
     value: any;
     onClick: () => void;
     bullet?: boolean;
-  }[];
+  }
 
-  const keys: keys = [
+  const keys: IKeys[] = [
     {
       value: <Delete width={20} height={20} />,
       onClick: () => deleteLast(),
@@ -25,13 +25,13 @@ const useKeyboard = () => {
     },
     { value: "C", onClick: () => reset(), bullet: true },
     {
-      value: "%",
-      onClick: () => setOperation("%"),
+      value: <Percentage width={20} height={20} />,
+      onClick: () => setOperation("percentage"),
       bullet: true,
     },
     {
       value: <Division width={20} height={20} />,
-      onClick: () => setOperation("/"),
+      onClick: () => setOperation("division"),
       bullet: true,
     },
     { value: "7", onClick: () => setNumber("7") },
@@ -39,7 +39,7 @@ const useKeyboard = () => {
     { value: "9", onClick: () => setNumber("9") },
     {
       value: <Multiply width={20} height={20} />,
-      onClick: () => setOperation("x"),
+      onClick: () => setOperation("multiplication"),
       bullet: true,
     },
     { value: "4", onClick: () => setNumber("4") },
@@ -47,7 +47,7 @@ const useKeyboard = () => {
     { value: "6", onClick: () => setNumber("6") },
     {
       value: <Minus width={20} height={20} />,
-      onClick: () => setOperation("-"),
+      onClick: () => setOperation("minus"),
       bullet: true,
     },
     { value: "1", onClick: () => setNumber("1") },
@@ -55,11 +55,11 @@ const useKeyboard = () => {
     { value: "3", onClick: () => setNumber("3") },
     {
       value: <Plus width={20} height={20} />,
-      onClick: () => setOperation("+"),
+      onClick: () => setOperation("sum"),
       bullet: true,
     },
     { value: "0", onClick: () => setNumber("0") },
-    { value: ",", onClick: () => setOperation(",") },
+    { value: ",", onClick: () => setOperation("coma") },
     { value: null, onClick: () => {} },
     {
       value: <Equal width={20} height={20} />,

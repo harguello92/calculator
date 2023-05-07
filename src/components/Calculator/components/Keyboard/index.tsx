@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import styles from "./index.module.css";
-import useKeyboard from "./useKeyboard";
+import useKeyboard from "../../hooks/useKeyboard";
 
 function Keyboard() {
   const { keys } = useKeyboard();
