@@ -2,7 +2,7 @@ import useGlobalState from "./useGlobalState";
 import { SIGNS } from "../constants/signs";
 import { getIsInitialStatus, getIsValidOperation } from "../utils";
 import type { Signs, SignTypes, Sign } from "../constants/signs";
-import { useCallback, useEffect } from "preact/hooks";
+import { useEffect } from "preact/hooks";
 
 const useActions = () => {
   const {
