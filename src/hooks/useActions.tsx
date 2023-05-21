@@ -33,6 +33,15 @@ const useActions = () => {
 
   const evaluation = () => {
     try {
+      const result = eval(
+        operations.reduce(
+          (acc: string, current: any) => acc + (current?.operation || current),
+          ""
+        )
+      ).toString();
+
+      if (result === display) return;
+
       setSubDisplay(
         operations.reduce(
           (acc: string, current: any) => acc + (current?.operation || current),
@@ -40,15 +49,7 @@ const useActions = () => {
         ) + SIGNS.equal.display
       );
 
-      setDisplay(
-        eval(
-          operations.reduce(
-            (acc: string, current: any) =>
-              acc + (current?.operation || current),
-            ""
-          )
-        ).toString()
-      );
+      setDisplay(result);
 
       // setOperationToGlobal(display.split(""));
     } catch (error) {
