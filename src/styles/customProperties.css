@@ -9,3 +9,7 @@
 :root {
   --border-radius: 8px;
 }
+
+:root {
+  --color-grey: #605f5f;
+}

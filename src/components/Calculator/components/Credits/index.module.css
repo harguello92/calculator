@@ -1,0 +1,8 @@
+.credits {
+  margin-top: 1rem;
+  color: var(--color-grey);
+}
+
+.credits__link {
+  color: var(--color-grey);
+}
