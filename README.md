@@ -1,6 +1,13 @@
 # Calculator
 
-Creating a calculator to integrate some tools at the same time
+Calculator project to test some technologies in a project:
+
+- Vite
+- pnpm
+- Preact
+- Typescript
+- Jest
+- Playwright
 
 # Project architecture
 
@@ -8,4 +15,6 @@ Creating a calculator to integrate some tools at the same time
 
 # Testing
 
-# Stack
+E2E:
+
+Unit:
