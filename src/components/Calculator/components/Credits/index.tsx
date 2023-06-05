@@ -4,7 +4,10 @@ function Credits() {
   return (
     <small className={styles.credits}>
       built with ☕ by{" "}
-      <a className={styles.credits__link} href="https://github.com/harguello92">
+      <a
+        className={styles.credits__link}
+        href="https://github.com/harguello92/calculator"
+      >
         harguello
       </a>
     </small>
