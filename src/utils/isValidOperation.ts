@@ -1,4 +1,5 @@
-import { SIGNS, Sign } from "../constants/signs";
+import { SIGNS } from "../constants/signs";
+import type { Sign } from "../constants/signs.types";
 import getIsInitialStatus from "./isInitialStatus";
 import getIsNumber from "./isNumber";
 import getLastItem from "./lastItem";

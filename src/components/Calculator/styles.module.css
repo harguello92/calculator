@@ -6,4 +6,6 @@
   flex-direction: column;
   padding: 0.5rem 1.2rem;
   position: relative;
+  width: 320px;
+  box-sizing: border-box;
 }

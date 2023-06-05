@@ -1,20 +1,4 @@
-export type SignTypes =
-  | "minus"
-  | "multiplication"
-  | "division"
-  | "percentage"
-  | "sum"
-  | "equal"
-  | "coma";
-
-export interface Sign {
-  display: string;
-  operation: string;
-}
-
-export type Signs = {
-  [key in SignTypes]: Sign;
-};
+import { Signs } from "./signs.types";
 
 export const SIGNS: Signs = {
   minus: {
@@ -45,4 +29,4 @@ export const SIGNS: Signs = {
     display: ",",
     operation: ",",
   },
-} as const;
+};

@@ -8,8 +8,7 @@ import { ReactComponent as Delete } from "../../Icons/Delete.svg";
 import { ReactComponent as Percentage } from "../../Icons/Percentage.svg";
 
 const useKeyboard = () => {
-  const { setOperation, setNumber, evaluation, reset, deleteLast } =
-    useActions();
+  const { setOperation, setNumber, evaluate, reset, deleteLast } = useActions();
 
   interface IKeys {
     value: any;
@@ -63,7 +62,7 @@ const useKeyboard = () => {
     { value: null, onClick: () => {} },
     {
       value: <Equal width={20} height={20} />,
-      onClick: () => evaluation(),
+      onClick: evaluate,
       bullet: true,
     },
   ];

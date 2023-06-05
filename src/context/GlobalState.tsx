@@ -1,34 +1,18 @@
 import { useState } from "preact/hooks";
-import { ComponentChildren, createContext } from "preact";
-import type { Sign } from "../constants/signs";
-
-interface GlobalState {
-  display: string;
-  setDisplay: (value: any) => void;
-  subDisplay: string;
-  setSubDisplay: (value: any) => void;
-  operations: Sign[];
-  setOperation: (value: any) => void;
-}
+import { createContext } from "preact";
+import { GlobalState, Props } from "./GlobalState.types";
 
 const GlobalContext = createContext({} as GlobalState);
 
-interface Props {
-  children: ComponentChildren;
-}
-
 const GlobalContextProvider = ({ children }: Props) => {
-  const [display, setDisplay] = useState("0");
-  const [subDisplay, setSubDisplay] = useState("");
-  const [operations, setOperation] = useState([]);
+  const [queue, pushQueue] = useState([]);
+  const [history, pushHistory] = useState([]);
 
   const value = {
-    display,
-    setDisplay,
-    subDisplay,
-    setSubDisplay,
-    operations,
-    setOperation,
+    queue,
+    pushQueue,
+    history,
+    pushHistory,
   };
 
   return (
