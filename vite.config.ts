@@ -1,7 +1,10 @@
-import { defineConfig } from "vite";
+import { UserConfig } from "vite";
 import preact from "@preact/preset-vite";
 import svgr from "vite-plugin-svgr";
+import ssr from "vite-plugin-ssr/plugin";
 
-export default defineConfig({
-  plugins: [preact(), svgr()],
-});
+const config: UserConfig = {
+  plugins: [preact(), svgr(), ssr()],
+};
+
+export default config;

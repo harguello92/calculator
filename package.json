@@ -10,12 +10,13 @@
   },
   "dependencies": {
     "classnames": "^2.3.2",
-    "preact": "^10.13.1"
+    "preact": "^10.13.1",
+    "vite-plugin-ssr": "^0.4.131"
   },
   "devDependencies": {
     "@playwright/test": "^1.31.2",
-    "jest": "^29.5.0",
     "@preact/preset-vite": "^2.5.0",
+    "jest": "^29.5.0",
     "typescript": "^5.0.2",
     "vite": "^4.2.0",
     "vite-plugin-svgr": "^2.4.0"
