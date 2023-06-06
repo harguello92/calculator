@@ -4,7 +4,7 @@ import svgr from "vite-plugin-svgr";
 import ssr from "vite-plugin-ssr/plugin";
 
 const config: UserConfig = {
-  plugins: [preact(), svgr(), ssr()],
+  plugins: [preact(), svgr()],
 };
 
 export default config;
