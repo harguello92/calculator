@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import styles from "./index.module.css";
-import useKeyboard from "../../hooks/useKeyboard";
+import classNames from 'classnames';
+import styles from './index.module.css';
+import useKeyboard from '../../hooks/useKeyboard';
 
 function Keyboard() {
   const { keys } = useKeyboard();
@@ -12,7 +12,7 @@ function Keyboard() {
           <button
             type="button"
             className={classNames(styles.key, {
-              [styles["key--bullet"]]: bullet,
+              [styles['key--bullet']]: bullet
             })}
             onClick={onClick}
           >
