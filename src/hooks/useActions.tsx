@@ -1,7 +1,7 @@
-import useGlobalState from "./useGlobalState";
-import { SIGNS } from "../constants/signs";
-import { getIsInitialStatus, getIsValidOperation } from "../utils";
-import type { Signs, SignTypes, Sign } from "../constants/signs.types";
+import useGlobalState from './useGlobalState';
+import { SIGNS } from '../constants/signs';
+import { getIsInitialStatus, getIsValidOperation } from '../utils';
+import type { Signs, SignTypes, Sign } from '../constants/signs.types';
 
 const useActions = () => {
   const { pushQueue, queue: globalQueue, pushHistory } = useGlobalState();
@@ -24,7 +24,7 @@ const useActions = () => {
     const result = eval(
       globalQueue.reduce((acc: string, current: any) => {
         return acc + (current?.operation || current);
-      }, "")
+      }, '')
     );
 
     pushQueue([result]);
@@ -44,7 +44,7 @@ const useActions = () => {
     setNumber,
     evaluate,
     reset,
-    deleteLast,
+    deleteLast
   };
 };
 
