@@ -1,16 +1,10 @@
-import classNames from "classnames";
-import styles from "./Header.module.css";
-import { ReactComponent as Minimize } from "../../Icons/Minus.svg";
-import { ReactComponent as Close } from "../../Icons/Multiply.svg";
+import classNames from 'classnames';
+import styles from './index.module.css';
+import { ReactComponent as Minimize } from '../../../Icons/Minus.svg';
+import { ReactComponent as Close } from '../../../Icons/Multiply.svg';
+import { HeaderProps } from './types';
 
-function Header() {
-  const onClose = () => {
-    console.log("Coming soon...");
-  };
-  const onMinimize = () => {
-    console.log("Coming soon...");
-  };
-
+function HeaderPresentation({ onClose, onMinimize }: HeaderProps) {
   return (
     <div className={styles.header}>
       <div className={styles.actions}>
@@ -31,4 +25,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderPresentation;

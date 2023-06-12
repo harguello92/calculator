@@ -1,16 +1,7 @@
 import Confetti from 'react-confetti';
-import { useEffect, useRef } from 'preact/hooks';
 import styles from './index.module.css';
 import classnames from 'classnames';
-
-interface DisplayPresentationProps {
-  historyDisplayKey: number;
-  subDisplay: string;
-  totalDisplayKey: number;
-  display: any;
-  queue: any[];
-  totalRef: any;
-}
+import { DisplayPresentationProps } from './types';
 
 function DisplayPresentation({
   historyDisplayKey,

@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef } from 'preact/hooks';
+import { MutableRef, useEffect, useMemo, useRef } from 'preact/hooks';
 import useGlobalState from '../../../../hooks/useGlobalState';
 import DisplayPresentation from './Presentation';
+import { Sign } from '../../../../constants/signs.types';
 
 function DisplayContainer() {
   const { queue, history } = useGlobalState();
-  const totalRef = useRef<any>();
+  const totalRef = useRef() as MutableRef<HTMLParagraphElement>;
 
   const subDisplay = useMemo(() => {
     if (history.length === 0) return '';
@@ -13,14 +14,15 @@ function DisplayContainer() {
 
   const display =
     queue.reduce(
-      (acc: string, current: any) => acc + (current?.display || current),
+      (acc: string, current: Sign) => acc + (current?.display || current),
       ''
-    ) || 0;
+    ) || '0';
 
   const historyDisplayKey = useMemo(() => Math.random(), [history]);
   const totalDisplayKey = useMemo(() => Math.random(), [history]);
 
   useEffect(() => {
+    if (!totalRef.current) return;
     totalRef.current.scrollLeft = totalRef.current.scrollWidth;
   }, [queue]);
 

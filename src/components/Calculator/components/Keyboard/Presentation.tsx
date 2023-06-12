@@ -1,10 +1,6 @@
 import classNames from 'classnames';
 import styles from './index.module.css';
-import { IKeys } from '../../hooks/useKeyboard';
-
-interface KeyboardProps {
-  keys: IKeys[];
-}
+import { KeyboardProps } from './types';
 
 function KeyboardPresentation({ keys }: KeyboardProps) {
   return (
