@@ -1,18 +1,19 @@
-import Confetti from 'react-confetti';
 import styles from './index.module.css';
 import classnames from 'classnames';
 import { DisplayPresentationProps } from './types';
+import Confetti from '../Confeti';
 
 function DisplayPresentation({
   historyDisplayKey,
   subDisplay,
   totalDisplayKey,
   display,
-  totalRef
+  totalRef,
+  showExplosion
 }: DisplayPresentationProps) {
   return (
     <>
-      <Confetti key={historyDisplayKey} recycle={false} />
+      {showExplosion && <Confetti />}
       <div className={styles.displays}>
         <p
           key={historyDisplayKey}

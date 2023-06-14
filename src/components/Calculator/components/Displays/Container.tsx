@@ -1,4 +1,4 @@
-import { MutableRef, useEffect, useMemo, useRef } from 'preact/hooks';
+import { MutableRef, useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import useGlobalState from '../../../../hooks/useGlobalState';
 import DisplayPresentation from './Presentation';
 import { Sign } from '../../../../constants/signs.types';
@@ -6,6 +6,8 @@ import { Sign } from '../../../../constants/signs.types';
 function DisplayContainer() {
   const { queue, history } = useGlobalState();
   const totalRef = useRef() as MutableRef<HTMLParagraphElement>;
+  const firstMount = useRef(true);
+  const [showExplosion, setShowExplosion] = useState(false);
 
   const subDisplay = useMemo(() => {
     if (history.length === 0) return '';
@@ -22,9 +24,17 @@ function DisplayContainer() {
   const totalDisplayKey = useMemo(() => Math.random(), [history]);
 
   useEffect(() => {
-    if (!totalRef.current) return;
     totalRef.current.scrollLeft = totalRef.current.scrollWidth;
   }, [queue]);
+
+  useEffect(() => {
+    if (firstMount.current) {
+      firstMount.current = false;
+      return;
+    }
+
+    setShowExplosion(true);
+  }, [history]);
 
   return (
     <DisplayPresentation
@@ -34,6 +44,7 @@ function DisplayContainer() {
       historyDisplayKey={historyDisplayKey}
       totalDisplayKey={totalDisplayKey}
       totalRef={totalRef}
+      showExplosion={showExplosion}
     />
   );
 }

@@ -8,4 +8,5 @@ export interface DisplayPresentationProps {
   display: string;
   queue: Sign[];
   totalRef: MutableRef<HTMLParagraphElement>;
+  showExplosion: boolean;
 }

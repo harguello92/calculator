@@ -1,3 +1,4 @@
+import ConfettiExplosion from 'react-confetti-explosion';
 import { GlobalContextProvider } from '../../context/GlobalState';
 import Credits from './components/Credits';
 import Display from './components/Displays';
